@@ -82,7 +82,7 @@ static int check_valid_heap_addr(void *bp);
 static void print_block(void *bp);
 static void print_heap_stats();
 static char *heap_listp;
-static char *free_listp = 0;
+static char *free_listp;
 
 int mm_init(void)
 {
@@ -144,6 +144,7 @@ void *mm_malloc(size_t size)
             return bp; 
         }
         /* No fit found. Get more memory and place the block */
+        //puts("EXTENDED MEMORY");
         extendsize = MAX(asize,CHUNKSIZE);
         if ((bp = extend_heap(extendsize/WSIZE)) == NULL)
             return NULL;
